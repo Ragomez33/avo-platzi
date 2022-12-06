@@ -12,7 +12,6 @@ const Home: React.FC = () => {
     }, []);
     return (
         <div>
-            <NavBar />
             <h1>
                 Hola mundo
             </h1>
