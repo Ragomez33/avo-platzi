@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from '../components/navBar/NavBar';
 const About: React.FC = () => {
-    return(
+    return (
         <div>
             <NavBar />
             <p>
