@@ -1,20 +1,36 @@
 import React from 'react';
 import NavBar from '../navBar/NavBar';
+import styled from '@emotion/styled';
 
+const MainContainer = styled.div({
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  fontFamily: 'Roboto Slab, serif',
+  color: '#000',
+  background: '#ddd',
+  minHeight: '100vh',
+  paddingTop: 20,
+  paddingBottom: 20,
+})
+const ContainerLayout = styled.div({
+  background: '#fff',
+  width: '50%',
+  borderRadius: '16px',
+  padding: 10,
+  height: 'fit-content'
+});
 type LayoutProps = {
   children: JSX.Element;
 };
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div>
-      <NavBar />
-      {children}
-      <footer style={{
-        marginTop: 50
-      }}>
-        This is the footer
-      </footer>
-    </div>
+    <MainContainer>
+      <ContainerLayout>
+        <NavBar />
+        {children}
+      </ContainerLayout>
+    </MainContainer>
   );
 }

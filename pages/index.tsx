@@ -1,6 +1,13 @@
+import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react';
+import { ProductCard } from '../components/Cards/ProductCard';
 import NavBar from '../components/navBar/NavBar';
 
+const Container = styled.div({
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent:'space-between',
+});
 
 const Home: React.FC = () => {
     const [productList, setProductList] = useState<TProduct[]>([]);
@@ -12,12 +19,11 @@ const Home: React.FC = () => {
     }, []);
     return (
         <div>
-            <h1>
-                Hola mundo
-            </h1>
-            {productList.map((item) => (
-                <div>{item.name}</div>
-            ))}
+            <Container>
+                {productList.map((item) => (
+                    <ProductCard productItem={item} />
+                ))}
+            </Container>
         </div>
     );
 }
