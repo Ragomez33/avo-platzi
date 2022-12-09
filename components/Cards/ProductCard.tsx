@@ -18,6 +18,13 @@ const Card = styled.div({
     '-webkit-box-shadow': '0px 10px 16px -7px rgba(0,0,0,0.75)',
     '-moz-box-shadow': '0px 10px 16px -7px rgba(0,0,0,0.75)',
     position: 'relative',
+    cursor: 'pointer',
+    ':hover': {
+        boxShadow: '0px 8px 8px -1px rgba(0,0,0,0.75)',
+        '-webkit-box-shadow': '0px 8px 8px -1px rgba(0,0,0,0.75)',
+        '-moz-box-shadow': '0px 8px 8px -1px rgba(0,0,0,0.75)',
+        borderColor: '#9c9898',
+    }
 })
 const ImageContainer = styled.div({
     width: '100%',
@@ -26,10 +33,11 @@ const ImageContainer = styled.div({
 });
 type ProductCardProps = {
     productItem: TProduct;
+    onClick: (val: string) => void;
 }
-export const ProductCard: React.FC<ProductCardProps> = ({ productItem }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ productItem, onClick }) => {
     return (
-        <Card>
+        <Card onClick={() => onClick(productItem.id)}>
             <p style={{
                 fontWeight: 500,
                 color: '#18a100'

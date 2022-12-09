@@ -14,6 +14,7 @@ class MyDocument extends Document {
         <body style={{ margin: 0 }}>
           <Main />
           <NextScript />
+          <div id="modal-root"></div>
         </body>
       </Html>
     )

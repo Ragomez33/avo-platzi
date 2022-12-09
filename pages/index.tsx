@@ -1,30 +1,49 @@
 import styled from '@emotion/styled';
+import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
 import { ProductCard } from '../components/Cards/ProductCard';
-import NavBar from '../components/navBar/NavBar';
+import { ModalComponent } from '../components/Modal/ModalComponent';
 
 const Container = styled.div({
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent:'space-between',
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'space-between',
+  marginTop: 50
 });
 
 const Home: React.FC = () => {
-    const [productList, setProductList] = useState<TProduct[]>([]);
+  const router = useRouter();
+  const [productList, setProductList] = useState<TProduct[]>([]);
 
-    useEffect(() => {
-        fetch('/api/avo')
-            .then((res) => res.json())
-            .then(({ data }) => setProductList(data));
-    }, []);
-    return (
-        <div>
-            <Container>
-                {productList.map((item) => (
-                    <ProductCard productItem={item} />
-                ))}
-            </Container>
-        </div>
-    );
+  useEffect(() => {
+    fetch('/api/avo')
+      .then((res) => res.json())
+      .then(({ data }) => setProductList(data));
+  }, []);
+
+  const onClickProduct = (productId: string): void => {
+    router.push(`/product/${productId}`);
+  };
+  return (
+    <div>
+      <h1 style={{
+        fontWeight: 500,
+        color: '#18a100'
+      }}>
+        Welcome to Avo Store
+      </h1>
+      <Container>
+        {productList.map((item) => (
+          <ProductCard productItem={item} onClick={onClickProduct} />
+        ))}
+      </Container>
+      {/* <ModalComponent
+        onClose={() => setShowModal(false)}
+        show={showModal}
+        title='Select the quantity'
+      >
+      </ModalComponent> */}
+    </div>
+  );
 }
 export default Home;

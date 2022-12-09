@@ -24,7 +24,15 @@ type TProduct = {
   image: Url
   attributes: TProductAttributes
 }
-
+type TProductCart = {
+  id: TProductId
+  name: string
+  sku: string
+  price: number
+  image: Url
+  attributes: TProductAttributes
+  quantity: number
+}
 type TAPIAVODetailResponse = TProduct
 
 type TAPIAvoResponse = {

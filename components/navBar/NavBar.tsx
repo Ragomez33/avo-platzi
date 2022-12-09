@@ -3,12 +3,13 @@ import Link from 'next/link';
 import styled from '@emotion/styled';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { AiOutlineHome } from 'react-icons/ai';
+import { useCart } from '../Cart/CartProvider';
 
 const Header = styled.div({
     width: '-webkit-fill-available',
     display: 'flex',
     justifyContent: 'space-between',
-    height: '20vh',
+    height: '5vh',
     padding: 10,
 });
 
