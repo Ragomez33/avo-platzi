@@ -36,14 +36,14 @@ const AddButton = styled.p({
   }
 });
 export const getStaticPaths: GetStaticPaths = async () => {
-  const response = await fetch('https://avo-platzi-iil5pvkmb-rgkoko.vercel.app/api/avo')
-  const { data: productList }: TAPIAvoResponse = await response.json();
-  const paths = productList.map((item) => ({
-    params: { id: item.id }
-  }));
+  // const response = await fetch('https://avo-platzi-iil5pvkmb-rgkoko.vercel.app/api/avo')
+  // const { data: productList }: TAPIAvoResponse = await response.json();
+  // const paths = productList.map((item) => ({
+  //   params: { id: item.id }
+  // }));
   return {
-    paths,
-    fallback: false
+    paths: [],
+    fallback: true
   }
 }
 export const getStaticProps: GetStaticProps = async ({ params }) => {
