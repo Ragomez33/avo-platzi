@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react';
 import { useCart } from '../components/Cart/CartProvider';
 import Image from 'next/image';
+import { TypoBasic, TypoBasic2 } from '../components/StyledComponents';
 
 const Container = styled.div({
   display: 'flex',
@@ -18,21 +19,7 @@ const ProductRow = styled.div({
   alignItems: 'center',
 });
 
-const TypoBasic = styled.p({
-  fontWeight: 500,
-  color: '#18a100',
-  flexGrow: 1,
-  flexBasis: 'min-content'
-})
-const TypoBasic2 = styled.p({
-  fontWeight: 500,
-  color: '#18a100',
-  fontSize: 30,
-  flexGrow: 1,
-  flexBasis: 'min-content',
-  marginLeft: 40,
-  marginRight: 10,
-})
+
 const Cart: React.FC = () => {
   const { products } = useCart();
   const [total, setTotal] = useState<number>(0);

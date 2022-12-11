@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useRouter } from 'next/dist/client/router';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ProductCard } from '../components/Cards/ProductCard';
 
 const Container = styled.div({
@@ -10,15 +10,17 @@ const Container = styled.div({
   marginTop: 50
 });
 
-const Home: React.FC = () => {
+export const getStaticProps = async (params) => {
+  const response = await fetch('https://avo-platzi-iil5pvkmb-rgkoko.vercel.app/api/avo')
+  const { data: productList }: TAPIAvoResponse = await response.json();
+  return {
+    props: {
+      productList
+    }
+  }
+};
+const Home: React.FC<{ productList: TProduct[] }> = ({ productList }) => {
   const router = useRouter();
-  const [productList, setProductList] = useState<TProduct[]>([]);
-
-  useEffect(() => {
-    fetch('/api/avo')
-      .then((res) => res.json())
-      .then(({ data }) => setProductList(data));
-  }, []);
 
   const onClickProduct = (productId: string): void => {
     router.push(`/product/${productId}`);
@@ -33,7 +35,7 @@ const Home: React.FC = () => {
       </h1>
       <Container>
         {productList.map((item) => (
-          <ProductCard productItem={item} onClick={onClickProduct} />
+          <ProductCard productItem={item} onClick={onClickProduct} key={item.sku} />
         ))}
       </Container>
     </div>

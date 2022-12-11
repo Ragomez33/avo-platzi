@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import styled from '@emotion/styled';
 import { AiOutlineArrowDown } from 'react-icons/ai';
 import { AiOutlineArrowUp } from 'react-icons/ai';
 import { useCart } from '../../components/Cart/CartProvider';
+import { GetStaticPaths, GetStaticProps } from 'next/types';
 
 const Container = styled.div({
   display: 'flex',
@@ -34,21 +34,34 @@ const AddButton = styled.p({
   ':hover': {
     background: '#18a100',
   }
-})
-const ProductItem: React.FC = () => {
-  const { onAddProduct } = useCart();
-  const [product, setProduct] = useState<TProduct>();
-  const [quantity, setQuantity] = useState<number>(0);
-  const router = useRouter();
-  const { id: productId } = router.query;
-
-  useEffect(() => {
-    if (productId) {
-      fetch(`/api/avo/${productId}`)
-        .then((res) => res.json())
-        .then(({ data }) => setProduct(data));
+});
+export const getStaticPaths: GetStaticPaths = async () => {
+  const response = await fetch('https://avo-platzi-iil5pvkmb-rgkoko.vercel.app/api/avo')
+  const { data: productList }: TAPIAvoResponse = await response.json();
+  const paths = productList.map((item) => ({
+    params: { id: item.id }
+  }));
+  return {
+    paths,
+    fallback: false
+  }
+}
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const id = params?.id as string;
+  const product: TAPIAvoResponse = await fetch(`https://avo-platzi-iil5pvkmb-rgkoko.vercel.app/api/avo/${id}`)
+    .then((res) => res.json())
+    .then(({ data }) => data);
+  return {
+    props: {
+      product
     }
-  }, [productId]);
+  }
+};
+
+const ProductItem: React.FC<{ product: TProduct }> = ({ product }) => {
+  const { onAddProduct } = useCart();
+  const [quantity, setQuantity] = useState<number>(0);
+
   const onClickDown = (): void => {
     if (quantity !== 0) {
       setQuantity(quantity - 1);
@@ -59,7 +72,13 @@ const ProductItem: React.FC = () => {
   }
 
   const onClickAddProduct = () => {
-    onAddProduct(product, quantity);
+    try {
+      onAddProduct(product, quantity);
+    } catch (e) {
+      console.log(e);
+    }
+
+    alert('Product added to cart!');
   };
 
   return (
