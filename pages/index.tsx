@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
 import { ProductCard } from '../components/Cards/ProductCard';
-import { ModalComponent } from '../components/Modal/ModalComponent';
 
 const Container = styled.div({
   display: 'flex',
@@ -37,12 +36,6 @@ const Home: React.FC = () => {
           <ProductCard productItem={item} onClick={onClickProduct} />
         ))}
       </Container>
-      {/* <ModalComponent
-        onClose={() => setShowModal(false)}
-        show={showModal}
-        title='Select the quantity'
-      >
-      </ModalComponent> */}
     </div>
   );
 }

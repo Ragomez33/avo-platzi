@@ -19,7 +19,7 @@ const NavBar: React.FC = () => {
             <Link href='/'>
                 <AiOutlineHome size={25} color='#18a100'/>
             </Link>
-            <Link href='/about'>
+            <Link href='/cart'>
                 <AiOutlineShoppingCart size={25} color='#18a100'/>
             </Link>
         </Header>

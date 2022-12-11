@@ -9,7 +9,7 @@ const MainContainer = styled.div({
   fontFamily: 'Roboto Slab, serif',
   color: '#000',
   background: '#ddd',
-  minHeight: '100vh',
+  height: '100vh',
   paddingTop: 20,
   paddingBottom: 20,
 })
@@ -18,7 +18,7 @@ const ContainerLayout = styled.div({
   width: '50%',
   borderRadius: '16px',
   padding: 10,
-  height: 'fit-content'
+  height: '100%'
 });
 type LayoutProps = {
   children: JSX.Element;
